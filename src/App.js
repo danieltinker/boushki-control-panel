@@ -51,12 +51,12 @@ function App() {
     ];
 
     // Show first dream immediately
-    setMessage(dreams[0]);
 
     // Schedule dream messages
     const dreamTimeouts = [
-      setTimeout(() => setMessage(dreams[1]), 3000),
-      setTimeout(() => setMessage(dreams[2]), 6000)
+      setTimeout(() => setMessage(dreams[0]), 1500),
+      setTimeout(() => setMessage(dreams[1]), 4500),
+      setTimeout(() => setMessage(dreams[2]), 7500),
     ];
 
     // Recharge interval: +10% per second
@@ -78,11 +78,7 @@ function App() {
 
   // General action handler
   const perform = (action) => {
-    if (action === "sleep") {
-      handleSleep();
-      return;
-    }
-
+    
     let result;
     switch (action) {
       case "eat":          result = boushki.eat();          break;
@@ -94,12 +90,18 @@ function App() {
       case "walk_dog":     result = boushki.walk_dog();     break;
       case "spa":          result = boushki.spa();          break;
       case "beach":        result = boushki.beach();        break;
+      case "sleep":        result = boushki.sleep();        break;
       default:             result = "Invalid action!";      break;
     }
 
     setMessage(result);
     setBattery(boushki.battery);
     setVis(visuals[action]);
+    if (action === "sleep") {
+      handleSleep();
+      return;
+    }
+
   };
 
   // Determine battery‐bar color

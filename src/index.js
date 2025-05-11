@@ -10,11 +10,10 @@ root.render(<App />);
 // finish UI with better colors - DONE
 // sleep makes everything disabled until the boushki wakes up. - DONE
 // add kiss or crazy surprise attack!!!!! - DONE
-
-// in sleep mode - funny prints about dreams schnitzel,etc..)
+// in sleep mode - funny prints about dreams schnitzel,etc..) - DONE
 
 // missing images. (play, dance, sleep, power_shnatz, kiss, walk dog , funny )) 
-// add avocado, funny feeling with a joke.
+// add Funny mode with jokes. - Play mode.
 // in tresure chest with secret code add my blessings to the boushki and make it very happy. in a pop up message. after x time on the app or x amount of actions. [btn/popup/snackbar/message]
 // todo: add matcha making logic, cant study without making a matcha and drinking it.
 // cant drink matcha without making it.
