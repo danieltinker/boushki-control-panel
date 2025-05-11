@@ -4,6 +4,7 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
+alert("go boush-boush!")
 root.render(<App />);
 
 // new todos:
@@ -12,12 +13,13 @@ root.render(<App />);
 // add kiss or crazy surprise attack!!!!! - DONE
 // in sleep mode - funny prints about dreams schnitzel,etc..) - DONE
 
-// missing images. (play, dance, sleep, power_shnatz, kiss, walk dog , funny )) 
 // add Funny mode with jokes. - Play mode.
 // in tresure chest with secret code add my blessings to the boushki and make it very happy. in a pop up message. after x time on the app or x amount of actions. [btn/popup/snackbar/message]
 // todo: add matcha making logic, cant study without making a matcha and drinking it.
 // cant drink matcha without making it.
+
 //TODO: DEPLOY THE APP TO HEROKU OR VERCEL
+// missing images. (play, dance, sleep, power_shnatz, kiss, walk dog , funny )) 
 
 //todo: images, jokes, bg music, blessing and deploy (optional - make match btn)...
 

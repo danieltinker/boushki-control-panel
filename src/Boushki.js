@@ -49,7 +49,7 @@ export default class Boushki {
   play() {
     this.battery = Math.max(0, this.battery - Boushki.actionCost.play);
     const who = this.getRandomNickname();
-    return `${who} is playing a fun game!`;
+    return `${who} is playing some music!`;
   }
 
   study() {
