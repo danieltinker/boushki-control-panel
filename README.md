@@ -68,3 +68,24 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+const visuals = {
+  play:          playImg,
+  eat:           eatImg,
+  study:         studyImg,
+  beach:          kissImg,
+  dance:         danceImg,
+  walk_dog:      walkDogImg,
+  kiss:         beachImg,
+  spa:           spaImg,
+  power_shnatz:  powerShnatzImg,
+  sleep:         sleepImg
+};
+
+const dreams = [
+      // "Zzz... drifting in fluffy clouds...",
+      "Zzz... Your schnitzel tiras is safe...",
+      "Zzz... Avocado is the best fruit!!!",
+      "Zzz... Dreaming of a vacation in Italy...",
+    ];
+

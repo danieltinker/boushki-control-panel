@@ -30,13 +30,6 @@ const visuals = {
 
 const actions = Object.keys(visuals);
 
-// Disable durations in milliseconds
-const disableDurations = {
-  sleep:        6000,
-  spa:          3000,
-  power_shnatz: 1000
-};
-
 function App() {
   const [boushki]            = useState(() => new Boushki("Shani", 23));
   const [message, setMessage]      = useState("Welcome to Boushki's Control Panel!");
@@ -44,30 +37,46 @@ function App() {
   const [currentVis, setVis]       = useState(visuals.sleep);
   const [globalDisabled, setGlobalDisabled] = useState(false);
 
-  // Special sleep handler with dream messages
+  // Special sleep handler with gradual recharge and dreams
   const handleSleep = () => {
-    // reset battery and visual immediately
-    boushki.sleep();
-    setBattery(boushki.battery);
+    // Initialize
     setVis(visuals.sleep);
-
-    // start dream sequence
     setGlobalDisabled(true);
-    const dreams = [
-      "Zzz... drifting in fluffy clouds...",
-      "Zzz... your schnitzel tiras is safe"
+    boushki.battery = battery; // ensure sync
+
+   const dreams = [
+      "Zzz... Your schnitzel tiras is safe...",
+      "Zzz... Avocado is the best fruit!!!",
+      "Zzz... Dreaming of a vacation in Italy...",
     ];
-    // first dream immediately
+
+    // Show first dream immediately
     setMessage(dreams[0]);
-    // second dream at 3s
-    setTimeout(() => setMessage(dreams[1]), 3000);
-    // end sleep at duration, show good morning
-    setTimeout(() => {
-      setMessage(`Good morning ${boushki.name}!`);
-      setGlobalDisabled(false);
-    }, disableDurations.sleep);
+
+    // Schedule dream messages
+    const dreamTimeouts = [
+      setTimeout(() => setMessage(dreams[1]), 3000),
+      setTimeout(() => setMessage(dreams[2]), 6000)
+    ];
+
+    // Recharge interval: +10% per second
+    const intervalId = setInterval(() => {
+      boushki.battery = Math.min(100, boushki.battery + 10);
+      setBattery(boushki.battery);
+
+      if (boushki.battery >= 100) {
+        // Clear interval and pending dreams
+        clearInterval(intervalId);
+        dreamTimeouts.forEach(clearTimeout);
+
+        // Wake up
+        setMessage(`Good morning ${boushki.name}!`);
+        setGlobalDisabled(false);
+      }
+    }, 1000);
   };
 
+  // General action handler
   const perform = (action) => {
     if (action === "sleep") {
       handleSleep();
@@ -91,15 +100,9 @@ function App() {
     setMessage(result);
     setBattery(boushki.battery);
     setVis(visuals[action]);
-
-    const ms = disableDurations[action];
-    if (ms) {
-      setGlobalDisabled(true);
-      setTimeout(() => setGlobalDisabled(false), ms);
-    }
   };
 
-  // battery bar color
+  // Determine battery‐bar color
   const levelClass =
     battery > 70 ? "high" :
     battery > 20 ? "medium" :
@@ -124,8 +127,9 @@ function App() {
       </div>
 
       <div className="buttons">
-  
+    
 
+        {/* Other action buttons */}
         {actions.map((act) => {
           const cost = Boushki.actionCost[act] || 0;
           return (
@@ -141,7 +145,7 @@ function App() {
           );
         })}
 
-              {/* "Kiss or Go Crazy" button still here if needed */}
+            {/* “Kiss or Go Crazy” button */}
         <button
           className="action-btn kiss-or-crazy"
           onClick={() => {

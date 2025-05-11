@@ -2,11 +2,14 @@
 export default class Boushki {
   static nicknames = [
     "pashimotos","woush-woush","boushkileilei","boushki-woushki",
-    "pashimotos","pootalachamon","kababi","voushi","kababoshki"
+    "pashimotos","pootalachamon","kababi","voushi","kababoshki",
+    "Lychee","Hamtzootzi","shobabka","shoubidoubi","Funny Bunny",
+    "KoofAlHaGav","patzpatz","Zahav","Mevina Inyaan"
   ];
   static favoriteFoods = [
     "Homemade Vegetables Salad","Pizza by arale","Pasta by boushkie",
-    "Fish by Selas","Tiramisu by ernesto","picania by Nissim", "Steak by Amos", "Pasta by DEBERAH"
+    "Fish by Selas","Tiramisu by ernesto","Picanha by Nissim",
+    "Steak by Amos", "Pasta by DEBERAH","Wine @ Derech Ha Gefen"
   ];
   static actionCost = {
     play:         10,
@@ -50,7 +53,7 @@ export default class Boushki {
   study() {
     this.battery = Math.max(0, this.battery - Boushki.actionCost.study);
     const who = this.getRandomNickname();
-    return `${who} is studying hard @ Tel Aviv University!`;
+    return `${who} is studying hard! @ TAU`;
   }
 
   dance() {
@@ -80,7 +83,7 @@ export default class Boushki {
   walk_dog() {
     this.battery = Math.max(0, this.battery - Boushki.actionCost.walk_dog);
     const who = this.getRandomNickname();
-    return `${who} is walking with sheleg!`;
+    return `${who} is walking sheleg!`;
   }
 
   spa() {
