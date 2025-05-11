@@ -34,10 +34,9 @@ const actions = Object.keys(visuals);
 const SECRET_PASSWORD = "kebab";
 // Long birthday message
 const BIRTHDAY_MESSAGE = `
-🎉 Happy Birthday! 🎉
+🎉 יום הולדת שמח 🎉
 
-Today we celebrate you and all the joy you bring into our lives...
-(Your full message goes here.)
+אהובה שלי היום את חוגגת 24. 
 `;
 
 function App() {
