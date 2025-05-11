@@ -19,7 +19,7 @@ root.render(<App />);
 // cant drink matcha without making it.
 //TODO: DEPLOY THE APP TO HEROKU OR VERCEL
 
-
+//todo: images, jokes, bg music, blessing and deploy (optional - make match btn)...
 
 
 // TODO:  use forks to add parallelism logic to the code so that the boushki can do multiple things at once and not block the main thread of getting user input

@@ -31,7 +31,7 @@ const visuals = {
 const actions = Object.keys(visuals);
 
 // Secret for the birthday card
-const SECRET_PASSWORD = "yourSecretHere";
+const SECRET_PASSWORD = "kebab";
 // Long birthday message
 const BIRTHDAY_MESSAGE = `
 🎉 Happy Birthday! 🎉
@@ -57,12 +57,12 @@ function App() {
         if (guess === SECRET_PASSWORD) {
           window.alert(BIRTHDAY_MESSAGE);
         } else {
-          window.alert("❌ Wrong password. Please try again.");
-          askBirthday();
+          window.alert("❌ Wrong password.");
+          // askBirthday();
         }
       };
       askBirthday();
-    }, 1000 * 1000); // 1000 seconds
+    }, 100 * 1000); 
     return () => clearTimeout(timer);
   }, []);
 
