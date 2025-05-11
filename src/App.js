@@ -12,6 +12,8 @@ import powerShnatzImg from "./images/power_shnatz.png";
 import walkDogImg     from "./images/walk_dog.png";
 import spaImg         from "./images/spa.png";
 import beachImg       from "./images/beach.png";
+import crazyImg       from "./images/crazy.png";
+
 
 import eatSound         from "./assets/eat.mp3";
 import playSound        from "./assets/play.mp3";
@@ -25,6 +27,8 @@ import spaSound         from "./assets/spa.mp3";
 import beachSound       from "./assets/beach.mp3";
 import kissCrazySound   from "./assets/kiss_or_crazy.mp3";
 import confirmOkSound  from "./assets/confirm_ok.mp3";
+// import crazySound      from "./assets/crazy.mp3";
+
 
 import "./App.css";
 
@@ -39,6 +43,7 @@ const visuals = {
   walk_dog:     walkDogImg,
   spa:          spaImg,
   beach:        beachImg,
+  crazy:         crazyImg,
 };
 
 const audioFiles = {
@@ -54,6 +59,7 @@ const audioFiles = {
   beach:        beachSound,
   "kiss-or-crazy": kissCrazySound,
   "confirm-ok":    confirmOkSound,
+  // crazy:         crazySound,
 };
 
 const actions = Object.keys(visuals);
@@ -66,7 +72,7 @@ const BIRTHDAY_MESSAGE = `
 אהובה שלי את חוגגת 24. תודה שאת מי שאת בעולם הזה את יחידה ומיוחדת ואין כמוך בכל העולם. את מחוברת לעולם בדרכים שרק אלוהים יכול להבין, בשבילי זה הדברים הקטנים שעושים את הקשר שלנו כלכך גדול בפשטות. כתבתי את התוכנה הגאונית הזאת על מנת להנציח את כל הדברים הטעימים שאכלנו הצחוקים והחלומות.וגם כדי ללמד אותך איך כותבים בריאקט על הדרך;)אני רוצה לאחל לך מלא מלא אושר ואור אני רוצה לאחל לך את כל הדברים הטובים ואצלנו זה במעשים לא במילים אז יאללה תשימי כמה תחתונים בתיק ולכי תעשי פיפי יש לנו מטוס לתפוס!
 ותזכרי בכל דרך בכל זמן בושקי נמצא שם לתמוך בך תמשיכי להיות את כי את האדם הנפלא ביותר שהכרתי את הופכת אותי לטוב יותר מעצם היותך קיימת כי החיבור שלנו הוא טבעי ואמיתי ונכון ואת כל מה שאי פעם רציתי מכל כך הרבה בחינות.
 חצי מופרעת חצי רגועה חצי מאמינה חצי חילונית חצי שקטה ביישנית חצי רעשנית מטורללת חצי נורמאלית חצי משוגעת ועם כל החצאים האלה את 100% בושקי תמיד.ולפעמים לרגעי קסם את אפילו בושקי הזהב. הניצוצות שאני מרגיש בגוף בזכותך באו אחרי המתנה ארוכת שנים.
-לא הייתי מוכן להתאהב עד הסוף שאף אחד שאני לא באמת מאמין בטוב הטהור בליבה כי החיים יקחו אותנו למעלה ולמטה לחושך ולאור וטוב ולרע אבל מי שסוחב את האהבה בליבו אף פעם לא ייכנע. את בשבילי סמל לאמת ולרוח לחימה ולכוח רצון. 
+לא הייתי מוכן להתאהב עד הסוף שאף אחד שאני לא באמת מאמין בטוב הטהור בליבה כי החיים יקחו אותנו למעלה ולמטה לחושך ולאור וטוב ולרע אבל מי שסוחב את האהבה בליבו אף פעם לא ייכנע. את בשבילי סמל לאהבה לאמת ולרוח לחימה ולכוח רצון. 
 לימדת אותי מלא על עצמי ועל העולם וכל יום אני לומד משהו חדש ומתרגש לקום לצידך.ישלי הרבה מחשבות טובות על חיים משותפים איתך. את אור ענקי בלב שלי, וזה משהו שכל פעם שתסתכלי לי עמוק בעיניים תוכלי פשוט לראות אנחנו ביחד חזקים, בחממה שלנו תמיד כיף ומצחיק ומעניין. מחכה להמשיך לצמוח ולפרוח איתך. שלך הנסיך הקטן דניאל ברוך
 `;
 
@@ -77,7 +83,7 @@ function App() {
   const [currentVis, setVis]       = useState(visuals.sleep);
   const [globalDisabled, setGlobalDisabled] = useState(false);
 
-  // After 1000 seconds, prompt for the birthday card password
+  // After 50 seconds, prompt for the birthday card password
     useEffect(() => {
       const timer = setTimeout(() => {
         const askBirthday = () => {
@@ -87,12 +93,12 @@ function App() {
           if (guess === SECRET_PASSWORD) {
             window.alert(BIRTHDAY_MESSAGE);
           } else {
-            window.alert("❌ Wrong password.");
+            window.alert("❌ Wrong password. sry.");
             // askBirthday();
           }
         };
         askBirthday();
-      }, 100 * 1000); 
+      }, 50 * 1000); 
       return () => clearTimeout(timer);
     }, []);
 
@@ -101,16 +107,13 @@ function App() {
   useEffect(() => {
     Object.entries(audioFiles).forEach(([key, src]) => {
      const audio = new Audio(src);
-     // reduce volume for the play action only
      if (key === "play") {
-       audio.volume = 0.1;  // 30% volume
+       audio.volume = 0.1;  // 10% volume
      }
      audioRefs.current[key] = audio;
     });
   }, []);
 
-
-  
 
   // sleep handler with dreams & gradual recharge
   const handleSleep = () => {
@@ -235,11 +238,13 @@ function App() {
                 }
                 perform("kiss");
               } else {
-              setMessage("OMG! Boushki is GoiNg CraZZZzZyY! 😱");
               setGlobalDisabled(true);
-              boushki.play(); boushki.dance(); boushki.eat();
+              // setMessage("OMG! Boushki is GoiNg CraZZZzZyY! 😱");
+              // boushki.play(); boushki.dance(); boushki.eat();
+              const msg = boushki.crazy();
+              setMessage(msg);
               setBattery(boushki.battery);
-              setVis(visuals.eat);
+              setVis(visuals.crazy);
               setGlobalDisabled(false);
             }
           }}

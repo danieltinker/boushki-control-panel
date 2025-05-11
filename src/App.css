@@ -23,7 +23,9 @@ body {
   box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
 }
 
-
+.action-btn.crazy {
+  display: none !important;
+}
 
 .message {
   font-size: 1.1rem;

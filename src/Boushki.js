@@ -98,4 +98,11 @@ export default class Boushki {
     const who = this.getRandomNickname();
     return `🏖️ ${who} is at the beach enjoying the sun!`;
   }
+
+
+    crazy() {
+      this.battery = 0;
+      const who = this.getRandomNickname();
+      return `🌀 ${who} is losing it and going crazy!!! OMG! Boushki is GoiNg CraZZZzZyY! 😱`;
+    }
 }
