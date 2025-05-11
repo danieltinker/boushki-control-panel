@@ -27,22 +27,22 @@ import spaSound         from "./assets/spa.mp3";
 import beachSound       from "./assets/beach.mp3";
 import kissCrazySound   from "./assets/kiss_or_crazy.mp3";
 import confirmOkSound  from "./assets/confirm_ok.mp3";
-// import crazySound      from "./assets/crazy.mp3";
+import crazySound      from "./assets/crazy.mp3";
 
 
 import "./App.css";
 
 const visuals = {
   eat:          eatImg,
-  play:         playImg,
   study:        studyImg,
   dance:        danceImg,
+  beach:        beachImg,
+  walk_dog:     walkDogImg,
+  play:         playImg,
   kiss:         kissImg,
   sleep:        sleepImg,
   power_shnatz: powerShnatzImg,
-  walk_dog:     walkDogImg,
   spa:          spaImg,
-  beach:        beachImg,
   crazy:         crazyImg,
 };
 
@@ -59,13 +59,13 @@ const audioFiles = {
   beach:        beachSound,
   "kiss-or-crazy": kissCrazySound,
   "confirm-ok":    confirmOkSound,
-  // crazy:         crazySound,
+  crazy:         crazySound,
 };
 
 const actions = Object.keys(visuals);
 
 // Secret for the birthday card
-const SECRET_PASSWORD = "kebab";
+const SECRET_PASSWORD = "white";
 // Long birthday message
 const BIRTHDAY_MESSAGE = `
 🎉 וושי יום הולדת שמח 🎉
@@ -80,7 +80,7 @@ function App() {
   const [boushki]            = useState(() => new Boushki("Shani", 23));
   const [message, setMessage]      = useState("Welcome to Boushki's Control Panel!");
   const [battery, setBattery]      = useState(boushki.battery);
-  const [currentVis, setVis]       = useState(visuals.sleep);
+  const [currentVis, setVis]       = useState(visuals.play);
   const [globalDisabled, setGlobalDisabled] = useState(false);
 
   // After 50 seconds, prompt for the birthday card password
@@ -88,9 +88,9 @@ function App() {
       const timer = setTimeout(() => {
         const askBirthday = () => {
           const guess = window.prompt(
-            "🎂 Surprise! To open your birthday card, enter the secret password:"
+            "🎂 Surprise! To open your birthday card, enter the secret password (hint: Daniel's favorite color):"
           );
-          if (guess === SECRET_PASSWORD) {
+          if (guess.toLowerCase() === SECRET_PASSWORD) {
             window.alert(BIRTHDAY_MESSAGE);
           } else {
             window.alert("❌ Wrong password. sry.");
@@ -241,6 +241,12 @@ function App() {
               setGlobalDisabled(true);
               // setMessage("OMG! Boushki is GoiNg CraZZZzZyY! 😱");
               // boushki.play(); boushki.dance(); boushki.eat();
+              // only play confirm-ok on OK
+                const okAudio = audioRefs.current["crazy"];
+                if (okAudio) {
+                  okAudio.currentTime = 0;
+                  okAudio.play().catch(() => {});
+                }
               const msg = boushki.crazy();
               setMessage(msg);
               setBattery(boushki.battery);

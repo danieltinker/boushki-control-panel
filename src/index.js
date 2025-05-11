@@ -14,14 +14,10 @@ root.render(<App />);
 // in sleep mode - funny prints about dreams schnitzel,etc..) - DONE
 
 // add Funny mode with jokes. - Play mode.
-// in tresure chest with secret code add my blessings to the boushki and make it very happy. in a pop up message. after x time on the app or x amount of actions. [btn/popup/snackbar/message]
-// todo: add matcha making logic, cant study without making a matcha and drinking it.
+// add matcha making logic, cant study without making a matcha and drinking it.
 // cant drink matcha without making it.
+// DEPLOY THE APP TO HEROKU OR VERCEL
 
-//TODO: DEPLOY THE APP TO HEROKU OR VERCEL
-// missing images. (play, dance, sleep, power_shnatz, kiss, walk dog , funny )) 
-
-//todo: images, jokes, bg music, blessing and deploy (optional - make match btn)...
 
 
 // TODO:  use forks to add parallelism logic to the code so that the boushki can do multiple things at once and not block the main thread of getting user input
