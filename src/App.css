@@ -39,13 +39,14 @@ body {
 }
 
 .status {
-  margin: 1rem 0;
+  /* margin: 1rem 0; */
 }
 .battery-meter {
   position: relative;
   width: 200px;
   height: 20px;
   margin: 0 auto;
+  margin-top: 2rem;
   border: 2px solid #666;
   border-radius: 4px;
   background: #eee;
@@ -139,7 +140,7 @@ body {
 
 /* kiss keeps its pink */
 .action-btn.kiss {
-  background: #f172b1;   /* hot pink */
+  background: rgb(236, 77, 109);  /* hot pink */
   color: white;
 }
 

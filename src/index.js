@@ -17,7 +17,7 @@ root.render(<App />);
 // in tresure chest with secret code add my blessings to the boushki and make it very happy. in a pop up message. after x time on the app or x amount of actions. [btn/popup/snackbar/message]
 // todo: add matcha making logic, cant study without making a matcha and drinking it.
 // cant drink matcha without making it.
-
+//TODO: DEPLOY THE APP TO HEROKU OR VERCEL
 
 
 

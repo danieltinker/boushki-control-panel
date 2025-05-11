@@ -1,5 +1,5 @@
 // src/App.js
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Boushki from "./Boushki";
 
 import eatImg         from "./images/eat.png";
@@ -16,61 +16,85 @@ import beachImg       from "./images/beach.png";
 import "./App.css";
 
 const visuals = {
-  play:          playImg,
-  eat:           eatImg,
-  study:         studyImg,
-  beach:          kissImg,
-  dance:         danceImg,
-  walk_dog:      walkDogImg,
-  kiss:         beachImg,
-  spa:           spaImg,
-  power_shnatz:  powerShnatzImg,
-  sleep:         sleepImg
+  play:         playImg,
+  eat:          eatImg,
+  study:        studyImg,
+  beach:        beachImg,
+  dance:        danceImg,
+  walk_dog:     walkDogImg,
+  kiss:         kissImg,
+  spa:          spaImg,
+  power_shnatz: powerShnatzImg,
+  sleep:        sleepImg,
 };
 
 const actions = Object.keys(visuals);
 
+// Secret for the birthday card
+const SECRET_PASSWORD = "yourSecretHere";
+// Long birthday message
+const BIRTHDAY_MESSAGE = `
+🎉 Happy Birthday! 🎉
+
+Today we celebrate you and all the joy you bring into our lives...
+(Your full message goes here.)
+`;
+
 function App() {
   const [boushki]            = useState(() => new Boushki("Shani", 23));
-  const [message, setMessage]      = useState("Welcome to Boushki's Control Panel!");
+  const [message, setMessage]      = useState("Welcome to Boushki's!");
   const [battery, setBattery]      = useState(boushki.battery);
   const [currentVis, setVis]       = useState(visuals.sleep);
   const [globalDisabled, setGlobalDisabled] = useState(false);
 
+  // After 1000 seconds, prompt for the birthday card password
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      const askBirthday = () => {
+        const guess = window.prompt(
+          "🎂 Surprise! To open your birthday card, enter the secret password:"
+        );
+        if (guess === SECRET_PASSWORD) {
+          window.alert(BIRTHDAY_MESSAGE);
+        } else {
+          window.alert("❌ Wrong password. Please try again.");
+          askBirthday();
+        }
+      };
+      askBirthday();
+    }, 1000 * 1000); // 1000 seconds
+    return () => clearTimeout(timer);
+  }, []);
+
   // Special sleep handler with gradual recharge and dreams
   const handleSleep = () => {
-    // Initialize
     setVis(visuals.sleep);
     setGlobalDisabled(true);
-    boushki.battery = battery; // ensure sync
+    boushki.battery = battery; // sync
 
-   const dreams = [
+    const dreams = [
       "Zzz... Your schnitzel tiras is safe...",
       "Zzz... Avocado is the best fruit!!!",
-      "Zzz... Dreaming of a vacation in Italy...",
+      "Zzz... Dreaming of a vacation in Italy..."
     ];
 
-    // Show first dream immediately
-
-    // Schedule dream messages
+    // first dream now
+    setMessage(dreams[0]);
+    // second & third dreams
     const dreamTimeouts = [
-      setTimeout(() => setMessage(dreams[0]), 1500),
-      setTimeout(() => setMessage(dreams[1]), 4500),
-      setTimeout(() => setMessage(dreams[2]), 7500),
+      setTimeout(() => setMessage(dreams[1]), 3000),
+      setTimeout(() => setMessage(dreams[2]), 6000)
     ];
 
-    // Recharge interval: +10% per second
+    // +10% battery per second until 100%
     const intervalId = setInterval(() => {
       boushki.battery = Math.min(100, boushki.battery + 10);
       setBattery(boushki.battery);
 
       if (boushki.battery >= 100) {
-        // Clear interval and pending dreams
         clearInterval(intervalId);
         dreamTimeouts.forEach(clearTimeout);
-
-        // Wake up
-        setMessage(`Good morning ${boushki.name}!`);
+        setMessage(`Good morning ${boushki.name}! 🌞`);
         setGlobalDisabled(false);
       }
     }, 1000);
@@ -78,7 +102,11 @@ function App() {
 
   // General action handler
   const perform = (action) => {
-    
+    if (action === "sleep") {
+      handleSleep();
+      return;
+    }
+
     let result;
     switch (action) {
       case "eat":          result = boushki.eat();          break;
@@ -90,21 +118,15 @@ function App() {
       case "walk_dog":     result = boushki.walk_dog();     break;
       case "spa":          result = boushki.spa();          break;
       case "beach":        result = boushki.beach();        break;
-      case "sleep":        result = boushki.sleep();        break;
       default:             result = "Invalid action!";      break;
     }
 
     setMessage(result);
     setBattery(boushki.battery);
     setVis(visuals[action]);
-    if (action === "sleep") {
-      handleSleep();
-      return;
-    }
-
   };
 
-  // Determine battery‐bar color
+  // Battery bar color
   const levelClass =
     battery > 70 ? "high" :
     battery > 20 ? "medium" :
@@ -129,9 +151,7 @@ function App() {
       </div>
 
       <div className="buttons">
-    
-
-        {/* Other action buttons */}
+        {/* Action buttons */}
         {actions.map((act) => {
           const cost = Boushki.actionCost[act] || 0;
           return (
@@ -147,7 +167,7 @@ function App() {
           );
         })}
 
-            {/* “Kiss or Go Crazy” button */}
+        {/* “Kiss or Go Crazy” button */}
         <button
           className="action-btn kiss-or-crazy"
           onClick={() => {
@@ -158,7 +178,9 @@ function App() {
             else {
               setMessage("OMG! Boushki is GoiNg CraZZZzZyY! 😱");
               setGlobalDisabled(true);
-              boushki.play(); boushki.dance(); boushki.eat();
+              boushki.play();
+              boushki.dance();
+              boushki.eat();
               setBattery(boushki.battery);
               setVis(visuals.eat);
               setGlobalDisabled(false);
