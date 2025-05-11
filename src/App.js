@@ -30,11 +30,11 @@ const visuals = {
 
 const actions = Object.keys(visuals);
 
-// Optional per-action disable durations (ms)
+// Disable durations in milliseconds
 const disableDurations = {
-  sleep:       6000,
-  spa:         3000,
-  power_shnatz:1000
+  sleep:        6000,
+  spa:          3000,
+  power_shnatz: 1000
 };
 
 function App() {
@@ -44,27 +44,54 @@ function App() {
   const [currentVis, setVis]       = useState(visuals.sleep);
   const [globalDisabled, setGlobalDisabled] = useState(false);
 
-  // Core action handler
+  // Special sleep handler with dream messages
+  const handleSleep = () => {
+    // reset battery and visual immediately
+    boushki.sleep();
+    setBattery(boushki.battery);
+    setVis(visuals.sleep);
+
+    // start dream sequence
+    setGlobalDisabled(true);
+    const dreams = [
+      "Zzz... drifting in fluffy clouds...",
+      "Zzz... your schnitzel tiras is safe"
+    ];
+    // first dream immediately
+    setMessage(dreams[0]);
+    // second dream at 3s
+    setTimeout(() => setMessage(dreams[1]), 3000);
+    // end sleep at duration, show good morning
+    setTimeout(() => {
+      setMessage(`Good morning ${boushki.name}!`);
+      setGlobalDisabled(false);
+    }, disableDurations.sleep);
+  };
+
   const perform = (action) => {
+    if (action === "sleep") {
+      handleSleep();
+      return;
+    }
+
     let result;
     switch (action) {
       case "eat":          result = boushki.eat();          break;
       case "play":         result = boushki.play();         break;
       case "study":        result = boushki.study();        break;
       case "dance":        result = boushki.dance();        break;
-      case "beach":        result = boushki.beach();        break;
-      case "sleep":        result = boushki.sleep();        break;
+      case "kiss":         result = boushki.kiss();         break;
       case "power_shnatz": result = boushki.power_shnatz(); break;
       case "walk_dog":     result = boushki.walk_dog();     break;
       case "spa":          result = boushki.spa();          break;
-      case "kiss":         result = boushki.kiss();         break;
+      case "beach":        result = boushki.beach();        break;
       default:             result = "Invalid action!";      break;
     }
+
     setMessage(result);
     setBattery(boushki.battery);
     setVis(visuals[action]);
 
-    // Temporarily disable all controls if needed
     const ms = disableDurations[action];
     if (ms) {
       setGlobalDisabled(true);
@@ -72,35 +99,7 @@ function App() {
     }
   };
 
-  // “Kiss or Go Crazy” special handler
-  const handleKissOrCrazy = () => {
-    const giveKiss = window.confirm(
-      "The boushki demands a kiss—or he’ll go crazy!\n\nGive him a kiss?"
-    );
-
-    if (giveKiss) {
-      perform("kiss");
-    } else {
-      // Crazy sequence
-      setMessage("OMG! Boushki is GoiNg CraZZZzZyY! 😱");
-      setGlobalDisabled(true);
-
-      // Apply play, dance, and eat in sequence
-      boushki.play();
-      boushki.dance();
-      boushki.eat();
-      
-      setTimeout(() => {}, 1000); // Wait for play
-      // Update UI to reflect final state (after eat)
-      setBattery(boushki.battery);
-      setVis(visuals.eat);
-
-      // Re-enable controls immediately
-      setGlobalDisabled(false);
-    }
-  };
-
-  // Determine battery bar color class
+  // battery bar color
   const levelClass =
     battery > 70 ? "high" :
     battery > 20 ? "medium" :
@@ -125,9 +124,8 @@ function App() {
       </div>
 
       <div className="buttons">
-        
+  
 
-        {/* Existing action buttons */}
         {actions.map((act) => {
           const cost = Boushki.actionCost[act] || 0;
           return (
@@ -137,18 +135,29 @@ function App() {
               className={`action-btn ${act}`}
               disabled={globalDisabled || battery < cost}
             >
-              {act
-                .replace("_", " ")
-                .replace(/\b\w/g, (l) => l.toUpperCase())}
+              {act.replace("_", " ").replace(/\b\w/g, l => l.toUpperCase())}
               {cost > 0 }
             </button>
           );
         })}
 
-        {/* New “Kiss or Go Crazy” button */}
+              {/* "Kiss or Go Crazy" button still here if needed */}
         <button
           className="action-btn kiss-or-crazy"
-          onClick={handleKissOrCrazy}
+          onClick={() => {
+            const yes = window.confirm(
+              "The boushki demands a kiss—or he’ll go crazy!\nGive him a kiss?"
+            );
+            if (yes) perform("kiss");
+            else {
+              setMessage("OMG! Boushki is GoiNg CraZZZzZyY! 😱");
+              setGlobalDisabled(true);
+              boushki.play(); boushki.dance(); boushki.eat();
+              setBattery(boushki.battery);
+              setVis(visuals.eat);
+              setGlobalDisabled(false);
+            }
+          }}
           disabled={globalDisabled}
         >
           Kiss or Go Crazy

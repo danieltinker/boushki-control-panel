@@ -6,15 +6,15 @@ export default class Boushki {
   ];
   static favoriteFoods = [
     "Homemade Vegetables Salad","Pizza by arale","Pasta by boushkie",
-    "Fish by Selas","Tiramisu by ernesto"
+    "Fish by Selas","Tiramisu by ernesto","picania by Nissim", "Steak by Amos", "Pasta by DEBERAH"
   ];
   static actionCost = {
-      play:         10,
-      study:        50,
-      dance:        30,
-      kiss:          0,
-      sleep:         0,
-      eat:          20,
+    play:         10,
+    study:        50,
+    dance:        30,
+    kiss:          0,
+    sleep:         0,
+    eat:          20,
     power_shnatz:  0,
     walk_dog:     10,
     spa:           0,
@@ -50,13 +50,13 @@ export default class Boushki {
   study() {
     this.battery = Math.max(0, this.battery - Boushki.actionCost.study);
     const who = this.getRandomNickname();
-    return `${who} is studying hard!`;
+    return `${who} is studying hard @ Tel Aviv University!`;
   }
 
   dance() {
     this.battery = Math.max(0, this.battery - Boushki.actionCost.dance);
     const who = this.getRandomNickname();
-    return `${who} is dancing joyfully!`;
+    return `${who} is dancing the shoubi doubi dance!`;
   }
 
   kiss() {
@@ -74,19 +74,19 @@ export default class Boushki {
   power_shnatz() {
     this.battery = 100;
     const who = this.getRandomNickname();
-    return `${who} is taking a power shnatz!`;
+    return `${who} is taking her power shnatz!`;
   }
 
   walk_dog() {
     this.battery = Math.max(0, this.battery - Boushki.actionCost.walk_dog);
     const who = this.getRandomNickname();
-    return `${who} is walking the dog!`;
+    return `${who} is walking with sheleg!`;
   }
 
   spa() {
     this.battery = 100;
     const who = this.getRandomNickname();
-    return `${who} is enjoying a relaxing spa!`;
+    return `${who} is enjoying the relaxing Jacob [Panda] spa!`;
   }
 
   beach() {
