@@ -3,8 +3,9 @@ export default class Boushki {
   static nicknames = [
     "pashimotos","woush-woush","boushkileilei","boushki-woushki",
     "pashimotos","pootalachamon","kababi","voushi","kababoshki",
-    "Lychee","Hamtzootzi","shobabka","shoubidoubi","Funny Bunny",
-    "KoofAlHaGav","patzpatz","Zahav","Mevina Inyaan","Boushki Hazahav",
+    "Lychee","Hamtzootzi","shobabka","shoubidoubi","Funny Bunny","voushilados",
+    "KoofAlHaGav","patzpatz","Zahav","Mevina Inyaan","Boushki Hazahav","little boushboush","bouski-bouski-boushki",
+    "boushk","hsoogimazt","tzamigoosh"
   ];
 
   static favoriteFoods = [
@@ -14,14 +15,14 @@ export default class Boushki {
   ];
 
   static actionCost = {
-    play:         10,
+    play:         45,
     study:        50,
-    dance:        30,
+    dance:        20,
     kiss:          0,
     sleep:         0,
-    eat:          20,
+    eat:          30,
     power_shnatz:  0,
-    walk_dog:     10,
+    walk_dog:     20,
     spa:           0,
     beach:        80
   };
