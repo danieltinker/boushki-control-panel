@@ -1,4 +1,4 @@
-HAPPY BIRTHDAY SHANI ! \n
+HAPPY BIRTHDAY SHANI !
 - I have created this little Bouski for you to play with. Take good care of it!
 Run:
 1. npm install
