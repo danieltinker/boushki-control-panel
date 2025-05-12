@@ -1,10 +1,9 @@
-HAPPY BIRTHDAY SHANI ! 
-I have created this little Bouski for you to play with.
-Take good care of it!
+HAPPY BIRTHDAY SHANI ! \n
+- I have created this little Bouski for you to play with. Take good care of it!
 Run:
 1. npm install
 2. npm start
-my home wifi: http://192.168.1.12:3000
+3. my home wifi: http://192.168.1.12:3000
 
 # Getting Started with Create React App
 
